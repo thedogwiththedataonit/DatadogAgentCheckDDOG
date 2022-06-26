@@ -19,7 +19,7 @@ class ddogMetric(AgentCheck):
     def check(self, instance):
         now = datetime.datetime.now()
         #if the time is not greater than 9:30am or less than 4pm
-        if now.hour > 9 and now.hour < 16:
+        if (now.hour > 9) and (now.hour < 16) and (now.weekday() < 5): 
             url = "https://financialmodelingprep.com/api/v3/quote/DDOG?apikey=dafde2e9a09c57318b3a0eca1cb5ad8a"
             response = requests.request("GET", url)
             data = response.json()
@@ -33,10 +33,10 @@ class ddogMetric(AgentCheck):
             self.gauge('ddog.sharesOutstanding', data[0]['sharesOutstanding'])
             self.gauge('ddog.eps', data[0]['eps'])
             self.gauge('ddog.pe', data[0]['pe'])
-            self.gauge('ddog.marketStatus', 'Open')
+            self.gauge('ddog.marketStatus', 1)
 
             logger.info('Datadog Stock Price: ' + str(data[0]['price']) + ' -- Percentage Change: ' + str(data[0]['changesPercentage']) + " timestamp: " + str(data[0]['timestamp']))
 
         else:
-            self.gauge('ddog.marketStatus', 'Closed')
+            self.gauge('ddog.marketStatus', 0)
         
