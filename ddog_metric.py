@@ -6,7 +6,7 @@ import sys
 import datetime
 
 logger = logging.getLogger()
-fileHandler = logging.FileHandler("/opt/datadog-agent/etc/checks.d/logfile.log")
+fileHandler = logging.FileHandler("/etc/dataog-agent/checks.d/logfile.log")
 streamHandler = logging.StreamHandler(sys.stdout)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 streamHandler.setFormatter(formatter)

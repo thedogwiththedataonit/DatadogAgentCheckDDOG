@@ -9,7 +9,7 @@ logs:
     #   tags: (optional) add tags to each log collected
 
   - type: file
-    path: opt/datadog-agent/etc/checks.d/logfile.log
+    path: /etc/dataog-agent/checks.d/logfile.log
     service: ddog_metric
     source: python
     sourcecategory: sourcecode
